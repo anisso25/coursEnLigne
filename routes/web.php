@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/courses', 'App\Http\controllers\CourseController@index')->name('courses.index');
 
-Route::get('/courses/test', 'App\Http\controllers\Controller@test');
+Route::get('/course/{id}', 'App\Http\controllers\CourseController@show')->name('courses.show');
 
 Route::middleware([
     'auth:sanctum',

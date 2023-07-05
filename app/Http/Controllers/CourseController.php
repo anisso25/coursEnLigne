@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Cours;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        // dd('hello');
-        // inertia('Courses/Index');
-        $cours = Cours::all();
-        // dd($cours);
+        $cours = Cours::with('user')->withCount('episodes')->get();
+        //dd($cours);
         return Inertia::render('Courses/Index', [
             'cours' => $cours
+        ]);
+    }
+
+    public function show($id)
+    {
+        $ids = intval($id);
+        // dd($ids);
+        $course = Cours::where('id', $id)->with('episodes')->first();
+        // dd($course);
+        return Inertia::render('Courses/Show', [
+            'course' => $course
         ]);
     }
 }
