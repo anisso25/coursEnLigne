@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cours;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,6 +12,10 @@ class CourseController extends Controller
     {
         // dd('hello');
         // inertia('Courses/Index');
-        return Inertia::render('Courses/Index');
+        $cours = Cours::all();
+        // dd($cours);
+        return Inertia::render('Courses/Index', [
+            'cours' => $cours
+        ]);
     }
 }
