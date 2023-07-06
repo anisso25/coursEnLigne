@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/courses', 'App\Http\controllers\CourseController@index')->name('courses.index');
 
-Route::get('/course/{id}', 'App\Http\controllers\CourseController@show')->name('courses.show');
+Route::post('/toggleProgress', 'App\Http\controllers\CourseController@toggleProgress')->name('courses.toggle');
 
 Route::middleware([
     'auth:sanctum',
@@ -26,4 +26,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/course/{id}', 'App\Http\controllers\CourseController@show')->name('courses.show');
+
+
 });

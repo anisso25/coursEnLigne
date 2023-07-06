@@ -27,4 +27,9 @@ class CourseController extends Controller
             'course' => $course
         ]);
     }
+
+    public function toggleProgress(Request $request)
+    {
+        return $request->imput('episodeId');
+    } 
 }
