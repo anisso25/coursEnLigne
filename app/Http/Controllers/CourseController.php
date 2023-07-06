@@ -30,6 +30,8 @@ class CourseController extends Controller
 
     public function toggleProgress(Request $request)
     {
-        return $request->imput('episodeId');
+        // dd($request);
+        return $request->input('episodeId');
+
     } 
 }
