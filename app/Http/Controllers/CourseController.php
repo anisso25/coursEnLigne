@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Cours;
+use App\Models\Episode;
+
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -31,7 +33,11 @@ class CourseController extends Controller
     public function toggleProgress(Request $request)
     {
         // dd($request);
-        return $request->input('episodeId');
+        $id = $request->input('episodeId');
+        $user = auth()->user();
 
+        $user->episodes()->toggle($id);
+
+        return $user->episodes;
     } 
 }
