@@ -19,7 +19,7 @@
                             <button class="text-gray-500 focus:text-indigo-500 focus:outline-none" 
                             @click="switchEpisode(index)">Voir l'épisode</button>
                         </div>
-                        <ProgressButton :episode-id="episode.id" />
+                        <ProgressButton :episode-id="episode.id" :watched-episodes="watched" />
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@ export default {
         ProgressButton
     },
 
-    props: ['course'],
+    props: ['course', 'watched'],
 
     data() {
         return {

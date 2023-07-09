@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Cours;
 use App\Models\Episode;
 
+
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -21,12 +22,13 @@ class CourseController extends Controller
 
     public function show($id)
     {
-        $ids = intval($id);
-        // dd($ids);
         $course = Cours::where('id', $id)->with('episodes')->first();
-        // dd($course);
+        
+        $watched = auth()->user()->episodes;
+
         return Inertia::render('Courses/Show', [
-            'course' => $course
+            'course' => $course,
+            'watched' => $watched
         ]);
     }
 
@@ -34,10 +36,11 @@ class CourseController extends Controller
     {
         // dd($request);
         $id = $request->input('episodeId');
+        
         $user = auth()->user();
 
         $user->episodes()->toggle($id);
-
+        // dd($user);
         return $user->episodes;
     } 
 }

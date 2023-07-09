@@ -18,6 +18,8 @@ Route::get('/courses', 'App\Http\controllers\CourseController@index')->name('cou
 
 Route::post('/toggleProgress', 'App\Http\controllers\CourseController@toggleProgress')->name('courses.toggle');
 
+Route::get('/course/{id}', 'App\Http\controllers\CourseController@show')->name('courses.show');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -26,8 +28,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-
-    Route::get('/course/{id}', 'App\Http\controllers\CourseController@show')->name('courses.show');
-
 
 });
