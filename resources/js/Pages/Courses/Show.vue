@@ -11,6 +11,9 @@
                 allowfullscreen>
             </iframe>
             <div class="py-3 text-sm text-gray-500">{{ this.courseShow.episodes[this.currentKey].description }}</div>
+            <div class="py-6">
+                <progress-bar :watched-episodes="watched" :episodes="course.episodes" />
+            </div>
             <div class="mt-6">
                 <ul v-for="(episode, index) in this.courseShow.episodes" v-bind:key="episode.id">
                     <li class="flex items-center justify-between mt-3">
@@ -28,13 +31,15 @@
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import ProgressButton from './ProgressButton.vue';
+import  AppLayout from '@/Layouts/AppLayout.vue';
+import  ProgressButton from './ProgressButton.vue';
+import ProgressBar from './ProgressBar.vue';
 
 export default {
     components: {
         AppLayout,
-        ProgressButton
+        ProgressButton,
+        ProgressBar
     },
 
     props: ['course', 'watched'],

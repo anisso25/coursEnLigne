@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button class="px-2 py-2 text-white bg-green-500 rounded" @click="toggleProgress()">
-            {{ isWatched ? 'Terminé' : 'Pas encore terminé' }}
+        <button class="px-2 py-2 text-white rounded" :class="isWatched ? 'bg-green-500' : 'bg-red-500'" @click="toggleProgress()">
+            {{ isWatched ? 'Terminé' : 'Terminé ?' }}
         </button>
     </div>
 </template>
@@ -49,6 +49,10 @@ export default {
                 }
             })
             .catch(error => console.log(error));
+    },
+
+        isWatched() {
+        return this.watchedEpisodes.includes(this.episodeId);
     }
 }
 </script>

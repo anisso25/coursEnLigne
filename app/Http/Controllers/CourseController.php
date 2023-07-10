@@ -4,17 +4,25 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Cours;
-use App\Models\Episode;
-
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        $cours = Cours::with('user')->withCount('episodes')->get();
-        //dd($cours);
+    $cours = Cours::with('user')
+        ->select('cours.*', DB::raw(
+            '(SELECT COUNT(DISTINCT(user_id))
+            FROM completions
+            INNER JOIN episodes ON completions.episode_id = episodes.id
+            WHERE episodes.cours_id = cours.id
+            ) AS participants'
+        ))
+        ->withCount('episodes')
+        ->latest()
+        ->get();
+            
         return Inertia::render('Courses/Index', [
             'cours' => $cours
         ]);
